@@ -264,7 +264,7 @@
                             alert('Thank you for your patronage. Enjoy your meal!');
                             location.href = 'index.html';
                         } else if (amountGiven > amountOwed) {  // if there is change
-                            const change = balance - debit;
+                            const change = amountGiven - amountOwed;
                             alert("Thanks for ordering! Here's your " + change + ' pesos change');
                             location.href = 'index.html';
                         } else if (amountGiven < amountOwed) {  // if payment too low
