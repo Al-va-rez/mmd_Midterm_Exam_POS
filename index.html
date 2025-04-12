@@ -14,13 +14,17 @@
 
 
         <main>
+
+            <!-- *FOR FUTURE REFERENCE -->
+            <!-- *Design at 1920x1080 resolution first -->
+
             <div class="flex flex-nowrap justify-center gap-16 mt-16">
                 
                 <!-- MENU -->
                 <div class="flex flex-col w-[70%] max-h-[70vh] border border-gray-400 rounded-md">
 
                     <!-- Header -->
-                    <div class="bg-red-500 border-b border-gray-400 text-5xl pt-5 pl-5 pb-8 text-white tracking-wide">Menu</div>
+                    <div class="bg-red-500 border-b border-gray-400 text-4xl pt-5 pl-5 pb-8 text-white tracking-wide">Menu</div>
                     <!-- /Header -->
                     
 
@@ -40,7 +44,7 @@
                 <div class="flex flex-col w-[20%] h-[80vh] border border-gray-400 rounded-md">
                     
                     <!-- Header -->
-                    <div class="bg-orange-400 border-b border-gray-400 text-5xl pt-5 pl-5 pb-8 text-white tracking-wide">Ordered Items</div>
+                    <div class="bg-orange-400 border-b border-gray-400 text-4xl pt-5 pl-5 pb-8 text-white tracking-wide">Ordered Items</div>
                     <!-- /Header -->
 
 
@@ -55,8 +59,11 @@
 
                     <!-- Footer -->
                     <div class="mt-auto border-t border-gray-400 space-y-4 p-4">
-                        <div id="orderTotal" class="text-5xl font-semibold">Total: </div>
+                        
+                        <div id="orderTotal" class="text-3xl font-semibold">Total: </div>
+
                         <form action="#" name="myForm" onsubmit="payment(event, this)" class="space-y-2">
+
                             <div class="flex flex-col items-end gap-4">
                                 <input class="w-full border rounded p-3 text-2xl focus:outline focus:outline-8 focus:outline-orange-200 focus:cursor-none" name="myPayment" type="number" placeholder="Enter the amount here" min="1" required>
                                 <button type="submit" class="bg-green-600 rounded-md text-white text-2xl px-4 py-2 hover:bg-green-700">Pay!</button>
@@ -157,12 +164,12 @@
                     // name
                     const itemName = document.createElement('div');
                     itemName.textContent = menuItems[i].name;
-                    itemName.classList.add('text-3xl', 'sm:max-2xl:text-lg');
+                    itemName.classList.add('text-xl');
                     
                     // price
                     const itemPrice = document.createElement('div');
                     itemPrice.textContent = menuItems[i].price + ' PHP';
-                    itemPrice.classList.add('text-3xl', 'sm:max-2xl:text-lg');
+                    itemPrice.classList.add('text-xl');
 
                     // quantity
                     const itemInput = document.createElement('input')
@@ -213,10 +220,10 @@
                     if (orderQuantity > 0) {
                         // Create text
                         itemName.appendChild(document.createTextNode(item.name));
-                        itemName.classList.add('text-left', 'text-4xl');
+                        itemName.classList.add('text-left', 'text-3xl');
 
                         itemQuanti.appendChild(document.createTextNode('Qty: ' + orderQuantity));
-                        itemQuanti.classList.add('text-right', 'text-3xl', 'text-green-600');
+                        itemQuanti.classList.add('text-right', 'text-2xl', 'text-green-600');
 
                         // Put text in container
                         newItem.appendChild(itemName);
@@ -252,16 +259,21 @@
                     // get customer payment
                     const balance = el.elements['myPayment'].value;
 
-                    if (balance == debit) {  // if exact amount
-                        alert('Thank you for your patronage. Enjoy your meal!');
-                        location.href = 'index.html';
-                    } else if (balance > debit) {  // if there is change
-                        const change = balance - debit;
-                        alert("Thanks for ordering! Here's your " + change + ' pesos change');
-                        location.href = 'index.html';
-                    } else if (balance < debit) {  // if payment too low
-                        alert('Not enough balance. Please try again.');
+                    if (orderPrices.length > 0) {
+                        if (balance == debit) {  // if exact amount
+                            alert('Thank you for your patronage. Enjoy your meal!');
+                            location.href = 'index.html';
+                        } else if (balance > debit) {  // if there is change
+                            const change = balance - debit;
+                            alert("Thanks for ordering! Here's your " + change + ' pesos change');
+                            location.href = 'index.html';
+                        } else if (balance < debit) {  // if payment too low
+                            alert('Not enough balance. Please try again.');
+                        }
+                    } else {
+                        alert('No items ordered');
                     }
+
                 }
             // process payment
         </script>
