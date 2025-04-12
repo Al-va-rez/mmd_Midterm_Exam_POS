@@ -254,20 +254,20 @@
                     event.preventDefault();
 
                     // get sum of all orders
-                    const debit = orderPrices.reduce((partialSum, a) => partialSum + a, 0);
+                    const amountOwed = orderPrices.reduce((partialSum, a) => partialSum + a, 0);
 
                     // get customer payment
-                    const balance = el.elements['myPayment'].value;
+                    const amountGiven = el.elements['myPayment'].value;
 
                     if (orderPrices.length > 0) {
-                        if (balance == debit) {  // if exact amount
+                        if (amountGiven == amountOwed) {  // if exact amount
                             alert('Thank you for your patronage. Enjoy your meal!');
                             location.href = 'index.html';
-                        } else if (balance > debit) {  // if there is change
+                        } else if (amountGiven > amountOwed) {  // if there is change
                             const change = balance - debit;
                             alert("Thanks for ordering! Here's your " + change + ' pesos change');
                             location.href = 'index.html';
-                        } else if (balance < debit) {  // if payment too low
+                        } else if (amountGiven < amountOwed) {  // if payment too low
                             alert('Not enough balance. Please try again.');
                         }
                     } else {
