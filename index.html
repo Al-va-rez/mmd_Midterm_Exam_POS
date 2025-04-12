@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Seaside Sizzle</title>
+        <link rel="icon" href="https://cdn.iconscout.com/icon/premium/png-256-thumb/seafood-restaurant-4452716-3689187.png?f=webp&w=256">
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body>
+        <header>
+
+        </header>
+
+
+        <main>
+            <div class="flex flex-nowrap justify-center gap-16 mt-16">
+                
+                <!-- MENU -->
+                <div class="flex flex-col w-[70%] max-h-[70vh] border border-gray-400 rounded-md">
+
+                    <!-- Header -->
+                    <div class="bg-red-500 border-b border-gray-400 text-5xl pt-5 pl-5 pb-8 text-white tracking-wide">Menu</div>
+                    <!-- /Header -->
+                    
+
+                    <!-- Main Content -->
+                    <div id="menu" class="flex flex-wrap justify-between overflow-auto px-12 py-4">
+
+                        <!-- add items dynamically using jscript -->
+
+                    </div>
+                    <!-- /Main Content -->
+                    
+                </div>
+                <!-- /MENU -->
+
+
+                <!-- INVOICE -->
+                <div class="flex flex-col w-[20%] h-[80vh] border border-gray-400 rounded-md">
+                    
+                    <!-- Header -->
+                    <div class="bg-orange-400 border-b border-gray-400 text-5xl pt-5 pl-5 pb-8 text-white tracking-wide">Ordered Items</div>
+                    <!-- /Header -->
+
+
+                    <!-- Receipt -->
+                    <div id="receipt" class="flex flex-col overflow-auto items-center space-y-4 py-8 px-4">
+                        
+                        <!-- add items dynamically using jscript -->
+
+                    </div>
+                    <!-- /Receipt -->
+
+
+                    <!-- Footer -->
+                    <div class="mt-auto border-t border-gray-400 space-y-4 p-4">
+                        <div id="orderTotal" class="text-5xl font-semibold">Total: </div>
+                        <form action="#" name="myForm" onsubmit="payment(event, this)" class="space-y-2">
+                            <div class="flex flex-col items-end gap-4">
+                                <input class="w-full border rounded p-3 text-2xl focus:outline focus:outline-8 focus:outline-orange-200 focus:cursor-none" name="myPayment" type="number" placeholder="Enter the amount here" min="1" required>
+                                <button type="submit" class="bg-green-600 rounded-md text-white text-2xl px-4 py-2 hover:bg-green-700">Pay!</button>
+                            </div>
+                            
+                        </form>
+                        
+                    </div>
+                    <!-- /Footer -->
+
+                </div>
+                <!-- /INVOICE -->
+
+            </div>
+        </main>
+
+
+        <footer>
+
+        </footer>
+
+
+
+        <script>
+            // Menu item names and prices plus images
+            const menuItems = [
+                {  // item 1
+                    name:'Mini Fish & Chips',
+                    price: 60,
+                    image:'https://img.freepik.com/premium-photo/isolated-portion-fried-fish-chips_219193-10402.jpg?w=740'
+                },
+                {  // item 2
+                    name:'Shrimp Tempura',
+                    price: 40,
+                    image:'https://img.freepik.com/premium-photo/mouthwatering-veggie-tempura-isolated-white-background_787273-66676.jpg?w=740'
+                },
+                {  // item 3
+                    name:'Tuna Sisig',
+                    price: 70,
+                    image:'https://img.freepik.com/premium-photo/picture-larb_871710-59586.jpg?w=740'
+                },
+                {  // item 4
+                    name:'Garlic Butter Mussels',
+                    price: 30,
+                    image:'https://img.freepik.com/premium-photo/plate-mussels-creamy-sauce-accompanied-by-toasted-bread_658005-43732.jpg?w=740'
+                },
+                {  // item 5
+                    name:'Seafood Lumpia',
+                    price: 50,
+                    image:'https://img.freepik.com/premium-photo/delicious-spring-rolls-with-dipping-sauce_1057059-2320.jpg?w=740'
+                },
+                {  // item 6
+                    name:'Spicy Squid Rice Bowl',
+                    price: 80,
+                    image:'https://img.freepik.com/premium-photo/japanese-dish-photograph-isolated-plain-background_941097-56981.jpg?w=740'
+                },
+                {  // item 7
+                    name:'Bangus Belly Sinigang',
+                    price: 90,
+                    image:'https://img.freepik.com/premium-photo/isolated-bowl-salmon-spinach-soup_219193-9828.jpg?w=740'
+                },
+                {  // item 8
+                    name:'Grilled Tilapia Salad',
+                    price: 120,
+                    image:'https://img.freepik.com/premium-photo/yummy-baked-cod-with-mediterranean-isolated-white-background_787273-74162.jpg?w=740'
+                }
+            ];
+
+            // create menu
+                for (var i = 0; i < menuItems.length; i++) {
+
+                    // menu item container
+                    const menuItem = document.createElement('div');
+                    menuItem.classList.add(
+                        'flex',
+                        'flex-col',
+                        'my-8',
+                        'w-[23%]',
+                        'h-max',
+                        'border',
+                        'border-gray-400',
+                        'rounded-md'
+                    );
+
+                    // image
+                    const imageContainer = document.createElement('div');
+                    imageContainer.classList.add('flex', 'flex-col', 'items-center');
+                    const itemImage = document.createElement('img');
+                    itemImage.src = menuItems[i].image;
+                    itemImage.classList.add('w-80', 'h-auto', 'rounded-t');
+
+                    imageContainer.appendChild(itemImage);
+
+                    // desc
+                    const itemDesc = document.createElement('div');
+                    itemDesc.classList.add('m-6', 'space-y-4');
+
+                    // name
+                    const itemName = document.createElement('div');
+                    itemName.textContent = menuItems[i].name;
+                    itemName.classList.add('text-3xl', 'sm:max-2xl:text-lg');
+                    
+                    // price
+                    const itemPrice = document.createElement('div');
+                    itemPrice.textContent = menuItems[i].price + ' PHP';
+                    itemPrice.classList.add('text-3xl', 'sm:max-2xl:text-lg');
+
+                    // quantity
+                    const itemInput = document.createElement('input')
+                    itemInput.classList.add('w-full', 'h-12', 'border', 'rounded', 'px-4', 'text-xl', 'focus:outline', 'focus:outline-8', 'focus:outline-red-200', 'focus:cursor-none');
+                    itemInput.type = 'number';
+                    itemInput.placeholder = 'Enter how many';
+                    itemInput.min = 0;
+
+                    // order button
+                    const orderItem = document.createElement('div');  // container
+                    orderItem.classList.add('flex', 'justify-end');
+                    
+                    const orderButton = document.createElement('button')  // actual button
+                    orderButton.classList.add('bg-red-400', 'rounded-md', 'text-white', 'text-2xl', 'px-3', 'py-2', 'hover:bg-red-500');
+                    orderButton.textContent = 'Add to order';
+
+                    const orderDetails = menuItems[i];
+                    orderButton.onclick = function() {addOrder(orderDetails, itemInput.value)};
+
+
+                    // place button inside its container
+                    orderItem.appendChild(orderButton);
+
+                    // put name, price, quantity, and order button inside item desc
+                    itemDesc.appendChild(itemName);
+                    itemDesc.appendChild(itemPrice);
+                    itemDesc.appendChild(itemInput);
+                    itemDesc.appendChild(orderItem);
+
+                    // put image and desc inside menu item container
+                    menuItem.appendChild(imageContainer);
+                    menuItem.appendChild(itemDesc);
+
+                    // add item to menu
+                    document.querySelector('#menu').appendChild(menuItem);
+                }
+            // create menu
+
+
+            // add order
+                const orderPrices = [];
+                function addOrder(item, orderQuantity) {
+                    const invoice = document.querySelector('#receipt');
+                    const newItem = document.createElement('div');
+                    const itemName = document.createElement('div');
+                    const itemQuanti = document.createElement('div');
+
+                    if (orderQuantity > 0) {
+                        // Create text
+                        itemName.appendChild(document.createTextNode(item.name));
+                        itemName.classList.add('text-left', 'text-4xl');
+
+                        itemQuanti.appendChild(document.createTextNode('Qty: ' + orderQuantity));
+                        itemQuanti.classList.add('text-right', 'text-3xl', 'text-green-600');
+
+                        // Put text in container
+                        newItem.appendChild(itemName);
+                        newItem.appendChild(itemQuanti);
+                        newItem.classList.add('flex', 'flex-col', 'justify-center', 'border', 'border-gray-400', 'rounded-md', 'w-full', 'h-auto', 'gap-8', 'px-6', 'py-8');
+
+                        // Add new item
+                        invoice.appendChild(newItem);
+
+
+                        // calculate prices
+                        const subtotal = item.price * orderQuantity;
+                        orderPrices.push(subtotal);
+
+                        const total = orderPrices.reduce((partialSum, a) => partialSum + a, 0);
+
+                        document.querySelector('#orderTotal').textContent = 'Total: ' + total + ' PHP';
+                    } else {
+                        alert('Enter quantity');
+                    }
+                }
+            // add order
+            
+
+            // process payment
+                function payment(event, el) {
+
+                    event.preventDefault();
+
+                    // get sum of all orders
+                    const debit = orderPrices.reduce((partialSum, a) => partialSum + a, 0);
+
+                    // get customer payment
+                    const balance = el.elements['myPayment'].value;
+
+                    if (balance == debit) {  // if exact amount
+                        alert('Thank you for your patronage. Enjoy your meal!');
+                        location.href = 'index.html';
+                    } else if (balance > debit) {  // if there is change
+                        const change = balance - debit;
+                        alert("Thanks for ordering! Here's your " + change + ' pesos change');
+                        location.href = 'index.html';
+                    } else if (balance < debit) {  // if payment too low
+                        alert('Not enough balance. Please try again.');
+                    }
+                }
+            // process payment
+        </script>
+    </body>
+</html>
